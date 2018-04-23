@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block head_title %} Answers|{{block.super}} {% endblock head_title %}
+
+{% block content %}
+<h1>{{ object.name }}</h1>
+<p>Location: {{ object.question.name }}</p>
+{% if object.contents %} 
+Contents
+<ul>
+	{% for ans in object.get_contents %}
+	<li>{{ ans }}</li>
+	{% endfor %}
+</ul>
+{% endif %}
+
+{% if object.excludes %} 
+Excludes
+<ul>
+	{% for ans in object.get_excludes %}
+	<li>{{ ans }}</li>
+	{% endfor %}
+</ul>
+{% endif %}
+
+</ul>
+{% endblock %}

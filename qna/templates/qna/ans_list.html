@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block head_title %} Answers|{{block.super}} {% endblock head_title %}
+
+{% block content %}
+<h1>Answer List <small> <a href='{% url "qna:create" %}'>Add </a> </small> </h1>
+
+<ul>
+	{% for obj in object_list %}
+	<li><a href='{{ obj.get_absolute_url }}'> {{ obj.name }}</a> <br/>
+		{% if obj.contents %} 
+		<b>Answer :</b>
+		<ul>
+			{% for ans in obj.get_contents %}
+			<li>{{ ans }}</li>
+			{% endfor %}
+		</ul>
+		{% endif %}
+
+		{% if obj.excludes %} 
+		Excludes
+		<ul>
+			{% for ans in obj.get_excludes %}
+			<li>{{ ans }}</li>
+			{% endfor %}
+		</ul>
+		{% endif %}
+
+	</li>
+	{% empty %}
+	<li><a href='{% url "qna:create" %}'>Add your answer</a></li>
+
+	{% endfor %}
+</ul>
+{% endblock %}

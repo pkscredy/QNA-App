@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block head_title %} {{form.instance.name}} |Answers|{{block.super}} {% endblock head_title %}
+
+{% block content %}
+<h1>{{ form.instance.name }}</h1>
+<p>Question: {{ form.instance.question.name }}</p>
+{% if form.instance.contents %} 
+Answer
+<ul>
+	{% for ans in form.instance.get_contents %}
+	<li>{{ ans }}</li>
+	{% endfor %}
+</ul>
+{% endif %}
+
+{% if form.instance.excludes %} 
+Excludes
+<ul>
+	{% for ans in form.instance.get_excludes %}
+	<li>{{ ans }}</li>
+	{% endfor %}
+</ul>
+{% endif %}
+
+<hr/>
+<h3>Make changes</h3>
+{% include 'snippets/form-snippet.html' with form=form %}
+
+</ul>
+{% endblock %}

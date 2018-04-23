@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block head_title %} {{ user.username }} {% endblock head_title %}
+
+{% block content %}
+<h1>{{ user.username }}</h1>
+  
+<p>{% include 'profiles/snippet/follow_form.html' with username=user.username is_following=is_following %}</p>
+
+
+<form class='form' method="GET" action=".">
+<input type="text" placeholder="Search.." name="q" value='{{ request.GET.q }}'>
+<button class="btn btn-default" type="submit">Search</button>
+	
+</form>
+
+<hr/>
+
+{% if locations %}
+{% for rest in locations %}
+	<div class="row">
+	<div class='col-sm-12'>
+		<div class="thumbnail">
+		<h4>{{ rest.title }}</h4> 
+		<p>{{  rest.location}} | {{ rest.category }}</p>
+		<p>
+			<b>Answers</b>
+		<ul>
+			{% for ans in rest.ans_set.all %}
+			<li style='margin-bottom: 15px;'><b>{{ ans.name }}</b><br/>
+				{{ ans.contents }}
+			</li>
+			{% endfor %}
+		</ul>
+	 	</p>
+	 	<hr/>
+	</div>
+</div>
+</div>
+	
+{% endfor %}
+{% else %}
+<p class="lead">No answer found</p>
+{% endif %}
+
+
+{% endblock %}
