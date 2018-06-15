@@ -1,6 +1,6 @@
 # QNA-App
 
-##Functionality:-
+## Functionality:-
 
 
 1. What are the questions asked by me.
